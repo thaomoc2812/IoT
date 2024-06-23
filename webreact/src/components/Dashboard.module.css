@@ -1,0 +1,88 @@
+.dashboard {
+    display: flex;
+    flex-direction: column; /* Hiển thị các phần tử theo chiều dọc */
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.inputContainer {
+    width: 100%; /* Chiều rộng 100% của trang */
+    margin: 0 auto; /* Canh giữa */
+    padding: 20px; /* Khoảng cách lề nội dung bên trong */
+}
+
+.dataContainer {
+    width: 100%; /* Chiều rộng 100% của trang */
+    margin: 0 auto; /* Canh giữa */
+    padding: 20px; /* Khoảng cách lề nội dung bên trong */
+    background-color: #87ab6f; /* Màu xanh lá */
+    border-radius: 10px; /* Bo góc */
+}
+
+
+.form {
+    display: flex;
+    flex-direction: column; /* Hiển thị các phần tử form theo chiều dọc */
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.label {
+    margin-bottom: 10px; /* Khoảng cách giữa label và input */
+    font-weight: bold;
+}
+
+.input {
+    width: 100%; /* Chiều rộng input theo phần tử cha */
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #87ab6f;
+    border-radius: 5px;
+    margin-bottom: 10px; /* Khoảng cách giữa các input */
+}
+
+.button {
+    width: 100%; /* Chiều rộng button theo phần tử cha */
+    padding: 8px 20px;
+    background-color: blue; /* Màu sắc tươi sáng như xanh lá */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px; /* Khoảng cách từ button lên trên */
+}
+
+.button:hover {
+    background-color: #5c864c;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.data {
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: left;
+    margin-bottom: 20px;
+    max-height: 300px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; /* Để các phần tử con chia đều không gian */
+}
+
+
+
+.data > div {
+    flex: 1; /* Để các phần tử con co giãn theo chiều ngang */
+    padding: 10px; /* Thêm padding nếu cần thiết */
+}
+
+.treeImage {
+    max-width: 100%;
+    max-height: 100%; /* Đảm bảo hình ảnh không bị tràn khỏi phần tử cha */
+    height: auto; /* Đảm bảo tỷ lệ hình ảnh được giữ nguyên */
+}

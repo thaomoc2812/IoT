@@ -1,0 +1,78 @@
+import React, { useState } from 'react';
+import axios from 'axios';
+import styles from './Dashboard.module.css'; // Import CSS module
+import treeImage from './tree.jpg'; // Import image file từ thư mục nơi bạn lưu trữ hình ảnh
+
+const Dashboard = () => {
+    const [macId, setMacId] = useState('');
+    const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+    const [customError, setCustomError] = useState(''); // State cho thông báo lỗi tùy chỉnh
+
+    const addDevice = async () => {
+        try {
+            setLoading(true);
+            const instance = axios.create({
+                baseURL: 'http://localhost:8000/api',
+                timeout: 1000,
+            });
+    
+            const response = await instance.get(`/chaucay/${macId}`);
+    
+            setData(response.data); // Cập nhật dữ liệu vào state khi nhận được kết quả từ API
+            setLoading(false);
+            setError(null); // Đặt error thành null khi không có lỗi
+            setCustomError(''); // Đặt thông báo lỗi tùy chỉnh thành rỗng khi không có lỗi
+        } catch (error) {
+            console.error('Lỗi khi thêm thiết bị:', error);
+            setError(error.message); // Cập nhật lỗi vào state nếu có lỗi xảy ra
+            setLoading(false);
+            setCustomError('Không thể tìm thấy thiết bị trên hệ thống với địa chỉ MAC này.'); // Thiết lập thông báo lỗi tùy chỉnh
+        }
+    };
+    
+
+    const handleChange = (e) => {
+        setMacId(e.target.value);
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        addDevice();
+    };
+
+    return (
+        <div className={styles.dashboard}>
+            <div className={styles.inputContainer}>
+                <form onSubmit={handleSubmit} className={styles.form}>
+                    <label htmlFor="macId" className={styles.label}>Enter MAC Address:</label>
+                    <input
+                        type="text"
+                        id="macId"
+                        value={macId}
+                        onChange={handleChange}
+                        className={styles.input}
+                    />
+                    <button type="submit" className={styles.button}>Add Device</button>
+                </form>
+                {loading && <p>Loading...</p>}
+                {customError && <p className={styles.error}>{customError}</p>} {/* Sử dụng customError thay vì error */}
+            </div>
+            <div className={styles.dataContainer}>
+                {data && (
+                    <div className={styles.data}>
+                        <p><strong>MAC:</strong> {data.MAC}</p>
+                        <p><strong>Soil:</strong> {data.Soil}</p>
+                        <p><strong>Water:</strong> {data.Water}</p>
+                        <p><strong>Temperature:</strong> {data.Temperature}</p>
+                        <p><strong>Humidity:</strong> {data.Humidity}</p>
+                        <p><strong>Arrival Timestamp:</strong> {data.arrival_timestamp}</p>
+                    </div>
+                )}
+            </div>
+        </div>
+    );
+};
+
+export default Dashboard;
