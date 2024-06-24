@@ -33,6 +33,13 @@ const Tree = ({ macId }) => {
         }
     };
 
+    useEffect(() => {
+        const interval = setInterval(() => {
+            fetchData();
+        }, 5000)
+        return () => clearInterval(interval)
+    });
+
     const handleSaveThreshold = async () => {
         try {
             setLoading(true);
